@@ -1,6 +1,7 @@
 package com.ecommerce.OrderService.services;
 
 import com.ecommerce.OrderService.entity.Order;
+import com.ecommerce.OrderService.external.client.ProductService;
 import com.ecommerce.OrderService.model.OrderRequest;
 import com.ecommerce.OrderService.repository.OrderRepository;
 import lombok.extern.log4j.Log4j2;
@@ -14,9 +15,13 @@ import java.time.Instant;
 public class OrderServiceImpl implements OrderService{
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    ProductService productService;
     @Override
     public long placeOrder(OrderRequest orderRequest) {
         log.info("Placing order request {}", orderRequest);
+        productService.reduceQuantity(orderRequest.getProductId(), orderRequest.getQuantity());
+        log.info("Creating order with status created");
         Order order = Order.builder()
                 .amount(orderRequest.getTotalAmount())
                 .orderStatus("CREATED")
