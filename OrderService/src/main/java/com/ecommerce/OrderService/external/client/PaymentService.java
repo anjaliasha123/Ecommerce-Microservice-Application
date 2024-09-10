@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(
         name = "PAYMENT-SERVICE",
-        fallback = ProductServiceFallback.class,
         path = "/payment"
 )
-@CircuitBreaker(name = "payment-external", fallbackMethod = "fallback")
+@CircuitBreaker(name = "external", fallbackMethod = "fallback")
 public interface PaymentService {
     @PostMapping
     ResponseEntity<Long> doPayment(@RequestBody PaymentRequest paymentRequest);

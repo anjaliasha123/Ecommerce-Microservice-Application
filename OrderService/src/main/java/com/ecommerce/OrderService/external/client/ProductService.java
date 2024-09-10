@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(
         name = "PRODUCT-SERVICE",
-        fallback = ProductServiceFallback.class,
         path = "/product"
 )
-@CircuitBreaker(name = "product-external", fallbackMethod = "fallback")
+@CircuitBreaker(name = "external", fallbackMethod = "fallback")
 public interface ProductService {
     @PutMapping(value = "/reduceQuantity/{id}")
     ResponseEntity<String> reduceQuantity(@PathVariable("id") long id, @RequestParam("quant") long quantity);

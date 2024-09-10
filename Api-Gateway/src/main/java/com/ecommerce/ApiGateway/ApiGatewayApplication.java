@@ -28,9 +28,9 @@ public class ApiGatewayApplication {
 		);
 	}
 
-	@Bean
-	KeyResolver userKeySolver(){
-		return exchange -> Mono.just("userKey");
-	}
+//	@Bean
+//	KeyResolver userKeySolver(){
+//		return exchange -> Mono.just("userKey");
+//	}
 
 }

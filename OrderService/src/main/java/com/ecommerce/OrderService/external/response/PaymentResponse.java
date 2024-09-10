@@ -1,5 +1,6 @@
 package com.ecommerce.OrderService.external.response;
 
+import com.ecommerce.OrderService.model.PaymentMode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +13,10 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 public class PaymentResponse {
-    private long orderId;
-    private String paymentMode;
-    private String referenceNumber;
-    private Instant paymentDate;
-    private String paymentStatus;
+    private long paymentId;
+    private String status;
+    private PaymentMode paymentMode;
     private long amount;
+    private Instant paymentDate;
+    private long orderId;
 }

@@ -1,5 +1,6 @@
 package com.ecommerce.OrderService.entity;
 
+import com.ecommerce.OrderService.model.PaymentMode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,8 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 public class TransactionDetails {
-    private String paymentMode;
+    private long paymentId;
+    private PaymentMode paymentMode;
     private String referenceNumber;
     private Instant paymentDate;
     private String paymentStatus;

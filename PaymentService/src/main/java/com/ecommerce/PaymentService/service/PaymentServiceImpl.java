@@ -1,6 +1,7 @@
 package com.ecommerce.PaymentService.service;
 
 import com.ecommerce.PaymentService.entity.TransactionDetails;
+import com.ecommerce.PaymentService.model.PaymentMode;
 import com.ecommerce.PaymentService.model.PaymentRequest;
 import com.ecommerce.PaymentService.repository.TransactionDetailsRepository;
 import com.ecommerce.PaymentService.responses.PaymentResponse;
@@ -36,12 +37,13 @@ public class PaymentServiceImpl implements PaymentService{
     @Override
     public PaymentResponse getPaymentDetails(long orderId) {
         TransactionDetails transactionDetails = transactionDetailsRepository.findByOrderId(orderId);
-        PaymentResponse paymentResponse = PaymentResponse.builder()
-                .orderId(transactionDetails.getOrderId())
-                .paymentStatus(transactionDetails.getPaymentStatus())
+        PaymentResponse paymentResponse
+                = PaymentResponse.builder()
+                .paymentId(transactionDetails.getId())
+                .paymentMode(PaymentMode.valueOf(transactionDetails.getPaymentMode()))
                 .paymentDate(transactionDetails.getPaymentDate())
-                .paymentMode(transactionDetails.getPaymentMode())
-                .referenceNumber(transactionDetails.getReferenceNumber())
+                .orderId(transactionDetails.getOrderId())
+                .status(transactionDetails.getPaymentStatus())
                 .amount(transactionDetails.getAmount())
                 .build();
         return paymentResponse;

@@ -70,26 +70,32 @@ public class OrderServiceImpl implements OrderService{
                         ()-> new CustomException("Order not found for order id: "+orderId, "NOT_FOUND", 404)
                 );
         ProductResponse productResponse = productService.getProductById(order.getProductId()).getBody();
-        Product product = Product.builder()
-                .productId(productResponse.getProductId())
-                .price(productResponse.getPrice())
-                .productName(productResponse.getProductName())
-                .build();
         PaymentResponse paymentResponse = paymentService.getPaymentDetailsByOrderId(orderId).getBody();
-        TransactionDetails transactionDetails = TransactionDetails.builder()
-                .amount(paymentResponse.getAmount())
-                .paymentDate(paymentResponse.getPaymentDate())
-                .referenceNumber(paymentResponse.getReferenceNumber())
-                .paymentMode(paymentResponse.getPaymentMode())
-                .paymentStatus(paymentResponse.getPaymentStatus())
+
+        OrderResponse.ProductDetails productDetails
+                = OrderResponse.ProductDetails
+                .builder()
+                .productName(productResponse.getProductName())
+                .productId(productResponse.getProductId())
                 .build();
-        OrderResponse orderResponse = OrderResponse.builder()
-                .orderId(orderId)
+
+        OrderResponse.PaymentDetails paymentDetails
+                = OrderResponse.PaymentDetails
+                .builder()
+                .paymentId(paymentResponse.getPaymentId())
+                .paymentStatus(paymentResponse.getStatus())
+                .paymentDate(paymentResponse.getPaymentDate())
+                .paymentMode(paymentResponse.getPaymentMode())
+                .build();
+
+        OrderResponse orderResponse
+                = OrderResponse.builder()
+                .orderId(order.getId())
                 .orderStatus(order.getOrderStatus())
                 .amount(order.getAmount())
                 .orderDate(order.getOrderDate())
-                .product(product)
-                .transactionDetails(transactionDetails)
+                .productDetails(productDetails)
+                .paymentDetails(paymentDetails)
                 .build();
 
         return orderResponse;

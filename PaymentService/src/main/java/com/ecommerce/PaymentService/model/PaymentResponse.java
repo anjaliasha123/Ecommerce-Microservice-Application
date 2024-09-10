@@ -1,6 +1,5 @@
-package com.ecommerce.PaymentService.responses;
+package com.ecommerce.PaymentService.model;
 
-import com.ecommerce.PaymentService.model.PaymentMode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +12,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 public class PaymentResponse {
+
     private long paymentId;
     private String status;
     private PaymentMode paymentMode;
