@@ -11,7 +11,8 @@
 	<groupId>com.ecommerce</groupId>
 	<artifactId>PaymentService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>PaymentService</name>
+	<packaging>jar</packaging>
+	<name>paymentservice</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -112,6 +113,16 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.3.2</version>
+				<configuration>
+					<to>
+						<image>roadmaplearner/${project.name}:v1</image>
+					</to>
 				</configuration>
 			</plugin>
 		</plugins>

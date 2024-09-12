@@ -1,0 +1,36 @@
+version: '3'
+services:
+  serviceregistry:
+    image: 'ecommerce/serviceregistry:v1'
+    container_name: serviceregistry
+    ports:
+      - '8761:8761'
+
+  configserver:
+    image: 'ecommerce/configserver:v1'
+    container_name: configserver
+    ports:
+      - '9296:9296'
+    depends_on:
+      - serviceregistry
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://configserver:9296/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  apigateway:
+    image: 'ecommerce/apigateway:v1'
+    container_name: apigateway
+    ports:
+      - '9091:9091'
+    depends_on:
+      configserver:
+        condition: service_healthy
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+
+
