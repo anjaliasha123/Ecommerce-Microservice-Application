@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-registry-deployment
+spec:
+  selector:
+    matchLabels:
+      app: service-registry
+      version: v01
+  template:
+    metadata:
+      labels:
+        app: service-registry
+        version: v01
+    spec:
+      containers:
+      - name: service-registry
+        image: roadmaplearner/serviceregistry:v1
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8761
+        
+

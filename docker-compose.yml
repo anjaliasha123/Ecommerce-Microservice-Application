@@ -1,13 +1,13 @@
 version: '3'
 services:
   serviceregistry:
-    image: 'ecommerce/serviceregistry:v1'
+    image: 'roadmaplearner/serviceregistry:v1'
     container_name: serviceregistry
     ports:
       - '8761:8761'
 
   configserver:
-    image: 'ecommerce/configserver:v1'
+    image: 'roadmaplearner/configserver:v1'
     container_name: configserver
     ports:
       - '9296:9296'
@@ -22,7 +22,7 @@ services:
       retries: 5
 
   apigateway:
-    image: 'ecommerce/apigateway:v1'
+    image: 'roadmaplearner/apigateway:v1'
     container_name: apigateway
     ports:
       - '9091:9091'
