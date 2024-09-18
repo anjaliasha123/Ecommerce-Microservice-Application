@@ -6,9 +6,7 @@
 # Docker Images
 
 - Payment Service :
-  ```markdown
-docker pull roadmaplearner/paymentservice
-  ```
+
 - Products Service : docker pull roadmaplearner/productservice
 - Order Service : docker pull roadmaplearner/orderservice
 - Service Registry : docker pull roadmaplearner/serviceregistry
@@ -23,3 +21,6 @@ docker pull roadmaplearner/paymentservice
 ![MySQL](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white) 
 
 
+  ```markdown
+docker pull roadmaplearner/paymentservice
+  ```
