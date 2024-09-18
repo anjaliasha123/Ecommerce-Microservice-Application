@@ -5,8 +5,7 @@
 ----
 # Docker Images
 
-- Payment Service :
-
+- Payment Service : docker pull roadmaplearner/paymenttservice
 - Products Service : docker pull roadmaplearner/productservice
 - Order Service : docker pull roadmaplearner/orderservice
 - Service Registry : docker pull roadmaplearner/serviceregistry
